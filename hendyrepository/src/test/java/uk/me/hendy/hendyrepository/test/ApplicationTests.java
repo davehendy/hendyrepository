@@ -82,6 +82,10 @@ public class ApplicationTests {
 		Menu menu = app.getMenu("davetest");
 		Set<MenuItem> menuItemSet = menu.getMenuItemSet();
 		System.out.println("menu=" + menu);
+		
+		for (MenuItem menuItem : menuItemSet) {
+			System.out.println("Item="+menuItem.getName());
+		}
 	}
 	
 	
