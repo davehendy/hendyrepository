@@ -26,7 +26,7 @@ public class MenuDaoJpa implements MenuDao {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MenuDaoJpa.class);
 
-	public Menu findById(String id) throws EntityNotFoundException {
+	public Menu findById(String id) { //throws EntityNotFoundException {
 		logger.debug("method findById(" + id + ")");
 		Menu menu = entityManager.find(Menu.class, id);
 		return menu;

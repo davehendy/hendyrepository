@@ -2,6 +2,8 @@ package uk.me.hendy.repository;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +13,7 @@ import uk.me.hendy.repository.model.Menu;
 
 public class RepositoryApplicationHibernateMySql implements
 		RepositoryApplication {
+	private static final Logger logger = LoggerFactory.getLogger(RepositoryApplicationHibernateMySql.class);
 	@Autowired
 	MenuDao menuDao;
 
@@ -19,6 +22,7 @@ public class RepositoryApplicationHibernateMySql implements
 	}
 	
 	public Menu getMenu(String name) {
+		logger.debug("getMenu("+name+")");
 		return menuDao.findById(name);
 	}
 	
