@@ -6,10 +6,10 @@ import java.util.Map;
 import javax.persistence.spi.PersistenceProvider;
 import javax.sql.DataSource;
 
+import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
@@ -31,6 +31,7 @@ import uk.me.hendy.repository.dao.impl.MenuDaoJpa;
 @EnableTransactionManagement
 @PropertySource(value="classpath:/hendyrepository-${user.name}.properties")
 public class JpaConfigurationMySql {
+	
 	@Autowired
 	private Environment environment;
 	
@@ -41,6 +42,16 @@ public class JpaConfigurationMySql {
 
 	@Bean
 	public DataSource dataSource() {
+		BasicDataSource ds = new BasicDataSource();
+		ds.setDriverClassName(environment.getProperty("drg.db.driver"));
+		ds.setUrl(environment.getProperty("drg.db.url"));
+		ds.setUsername(environment.getProperty("drg.db.user"));
+		ds.setPassword(environment.getProperty("drg.db.pass"));
+		ds.setInitialSize(new Integer(environment.getProperty("drg.db.initSize")));
+		ds.setTestWhileIdle(true);
+		ds.setTimeBetweenEvictionRunsMillis(10000);
+		return ds;
+		/*
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		//dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		//dataSource.setUrl("jdbc:mysql://localhost/hendymeu_content");
@@ -50,9 +61,11 @@ public class JpaConfigurationMySql {
 		dataSource.setUrl(environment.getProperty("drg.db.url"));
 		dataSource.setUsername(environment.getProperty("drg.db.user"));
 		dataSource.setPassword(environment.getProperty("drg.db.pass"));
+		//dataSource.
 		
 		
 		return dataSource;
+		*/
 	}
 
 	@Bean
@@ -116,13 +129,15 @@ public class JpaConfigurationMySql {
 	public RepositoryApplication repositoryApplication() {
 		return new RepositoryApplicationHibernateMySql();
 	}
-
 	
+
+	/*
 	@Bean RepositoryApplicationFactory repositoryApplicationFactory() {
 		RepositoryApplicationFactory appFact = new RepositoryApplicationFactory();
 		return appFact;
 		//return new RepositoryApplicationFactory();
 	}
+	*/
 	
 	/*
 	@Bean

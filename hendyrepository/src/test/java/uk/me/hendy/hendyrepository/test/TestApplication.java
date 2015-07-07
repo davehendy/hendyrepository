@@ -1,29 +1,37 @@
 package uk.me.hendy.hendyrepository.test;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import uk.me.hendy.repository.JpaConfigurationMySql;
+import uk.me.hendy.repository.RepositoryApplication;
+import uk.me.hendy.repository.RepositoryApplicationFactory;
 import uk.me.hendy.repository.dao.MenuDao;
-import uk.me.hendy.repository.dao.impl.MenuDaoJpa;
 import uk.me.hendy.repository.model.Menu;
 
-@Configuration
-@ComponentScan
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes=uk.me.hendy.repository.JpaConfigurationMySql.class)
 public class TestApplication {
+	
+	RepositoryApplication app;
+	//@Autowired
+	//RepositoryApplicationFactory repositoryApplicationFactory;
 
-	public static void main(String[] args) {
+	@Test
+	public void testCreate() {
 		System.out.println("Start Test2");
-		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(JpaConfigurationMySql.class);
-		MenuDao menuDao = context.getBean(MenuDao.class);
+		app=RepositoryApplicationFactory.getInstance();
+		//AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(JpaConfigurationMySql.class);
+		
 		
 		System.out.println("insert starts=====");
 		Menu menu = new Menu();
 		menu.setName("drrrr");
 		menu.setDescription("tetetststtsts");
-		menuDao.create(menu);
-		context.close();
+		app.createMenu(menu);
+		//context.close();
 	}
 
 }

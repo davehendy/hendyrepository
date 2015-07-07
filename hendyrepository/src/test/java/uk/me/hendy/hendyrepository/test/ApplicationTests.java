@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -15,11 +16,18 @@ import uk.me.hendy.repository.model.MenuItem;
 public class ApplicationTests {
 	
 	static RepositoryApplication app;
+	//static RepositoryApplicationFactory fact;
 	
 	@BeforeClass
 	public static void getRepositoryApplication() {
-		RepositoryApplicationFactory fact = new RepositoryApplicationFactory();
-		app = fact.getInstance(); //RepositoryApplicationFactory.getInstance();
+		//fact = new RepositoryApplicationFactory();
+		//app = fact.getInstance(); 
+		app=RepositoryApplicationFactory.getInstance();
+	}
+	
+	@AfterClass
+	public static void closeRepositoryApplication() {
+		RepositoryApplicationFactory.closeApplication();
 	}
 	
 	@Test
@@ -30,6 +38,10 @@ public class ApplicationTests {
 		menu.setDescription("created by Dave in jpa");
 		menu.setLinkUrl("hendy.me.uk");
 		//---
+		System.out.println("Closing app");
+		RepositoryApplicationFactory.closeApplication();
+		System.out.println("Opening app");
+		app=RepositoryApplicationFactory.getInstance();
 		Set<MenuItem> menuItemSet = new HashSet<MenuItem>();
 		MenuItem menuItem = new MenuItem();
 		menuItem.setMenuName("davemenu");

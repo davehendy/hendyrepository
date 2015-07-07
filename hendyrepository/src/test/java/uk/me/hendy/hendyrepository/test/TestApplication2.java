@@ -21,8 +21,8 @@ public class TestApplication2 {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(JpaConfigurationMySql.class);
 		Environment env = context.getBean(Environment.class);
 		System.out.println("env="+env);
-		RepositoryApplicationFactory fact = (RepositoryApplicationFactory) context.getBean("repositoryApplicationFactory");
-		RepositoryApplication app = fact.getInstance();
+		//RepositoryApplicationFactory fact = (RepositoryApplicationFactory) context.getBean("repositoryApplicationFactory");
+		RepositoryApplication app = RepositoryApplicationFactory.getInstance();
 		
 		
 		List<Menu> menuList = app.getMenuList();

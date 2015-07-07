@@ -1,30 +1,56 @@
 package uk.me.hendy.repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+
 public class RepositoryApplicationFactory {
 	
+	private static final Logger logger = LoggerFactory.getLogger(RepositoryApplicationFactory.class);
+	//@Autowired
+	private static RepositoryApplication repositoryApplication;
+	private static AnnotationConfigApplicationContext context;
+	@PersistenceContext
+	private EntityManager entityManager;
 	
-	@Autowired
-	private RepositoryApplication instance = null;
-	
-	private void createInstance() {
-		if (instance == null) {
-			System.out.println("Creating Repository Application Context");
-			AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(JpaConfigurationMySql.class);
+	private static void createInstance() {
+		logger.info("createInstance");
+		if (repositoryApplication == null) {
+			logger.info("Creating Repository Application Context");
+			context = new AnnotationConfigApplicationContext(JpaConfigurationMySql.class);
+
 			
-			instance = ((RepositoryApplicationFactory) context.getBean("repositoryApplicationFactory")).getInstance();
+			//((RepositoryApplicationFactory) context.getBean("repositoryApplicationFactory")).getInstance();
+			repositoryApplication = (RepositoryApplication)context.getBean("repositoryApplication");
+			
 		} else {
-			System.out.println("Already created");
+			logger.info("Repository Application already created");
 		}
+		
 	}
 
-	public RepositoryApplication getInstance() {
-		if (instance == null) {
+	public static RepositoryApplication getInstance() {
+		if (repositoryApplication == null) {
 			createInstance();
+		} else {
+			logger.info("Repository Application instance already exists - return that");
 		}
-		return instance;
+		
+		return repositoryApplication;
+	}
+	
+	public static void closeApplication() {
+				
+		logger.info("Closing Spring application context " + context);
+		context.stop();
+		context.close();
+		repositoryApplication = null;
+		
 	}
 	
 
