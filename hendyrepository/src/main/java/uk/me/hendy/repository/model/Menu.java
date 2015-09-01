@@ -28,6 +28,9 @@ public class Menu implements Serializable {
 
 	private String description;
 	
+	@Column(name="link_url")
+	private String linkUrl;
+	
 	/**
 	 * @return the linkUrl
 	 */
@@ -42,8 +45,7 @@ public class Menu implements Serializable {
 		this.linkUrl = linkUrl;
 	}
 
-	@Column(name="link_url")
-	private String linkUrl;
+	
 	
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="menuName", orphanRemoval=true)
 	private Set<MenuItem> menuItemSet;

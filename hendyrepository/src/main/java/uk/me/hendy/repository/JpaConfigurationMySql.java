@@ -13,7 +13,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -25,6 +24,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import uk.me.hendy.repository.dao.MenuDao;
 import uk.me.hendy.repository.dao.impl.MenuDaoJpa;
+import uk.me.hendy.repository.hendycam.dao.HendyCamDao;
+import uk.me.hendy.repository.hendycam.dao.impl.HendyCamDaoDefault;
 //import org.hibernate.cache.HashtableCacheProvider;
 
 @Configuration
@@ -122,6 +123,11 @@ public class JpaConfigurationMySql {
 	@Bean
 	public MenuDao menuDao() {
 		return new MenuDaoJpa();
+	}
+	
+	@Bean
+	public HendyCamDao hendyCamDao() {
+		return new HendyCamDaoDefault();
 	}
 	
 	

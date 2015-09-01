@@ -16,7 +16,7 @@ import uk.me.hendy.repository.dao.MenuDao;
 import uk.me.hendy.repository.model.Menu;
 
 @Repository
-@Transactional(propagation=Propagation.SUPPORTS, readOnly=true)
+
 public class MenuDaoJpa implements MenuDao {
 	
 	@PersistenceContext
@@ -44,18 +44,16 @@ public class MenuDaoJpa implements MenuDao {
 	}
 	
 
-	@Transactional(propagation=Propagation.MANDATORY,readOnly=false)
 	public void create(Menu menu) {
 		entityManager.persist(menu);
 	}
 	
-	@Transactional(propagation=Propagation.MANDATORY,readOnly=false)
 	public void remove(Menu menu) {
 		entityManager.remove(entityManager.contains(menu) ? menu : entityManager.merge(menu));
 	}
 
-	@Transactional(propagation=Propagation.MANDATORY,readOnly=false)
 	public void update(Menu menu) {
+		logger.debug("update("+menu+")");
 		entityManager.merge(menu);
 	}
 

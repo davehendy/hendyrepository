@@ -1,4 +1,4 @@
-package uk.me.hendy.hendyrepository.test;
+package uk.me.hendy.hendyrepository;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
