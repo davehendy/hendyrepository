@@ -33,6 +33,7 @@ public class HendyCamDaoDefault implements HendyCamDao  {
 		for (File file : fileList) {
 			HendyCamImage image = new HendyCamImage();
 			image.setName(file.getName());
+			image.setPath(file.getPath());
 			Calendar cal=Calendar.getInstance();
 			cal.setTimeInMillis(file.lastModified());
 			image.setDateCreated(cal.getTime());

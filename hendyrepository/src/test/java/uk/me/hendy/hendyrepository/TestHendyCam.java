@@ -21,7 +21,7 @@ public class TestHendyCam {
 	public void test() {
 		List<HendyCamImage> list = app.getHendyCamImages();
 		for (HendyCamImage image : list) {
-			System.out.println ("date="+ image.getDateCreated() + ";name="+image.getName());
+			System.out.println ("date="+ image.getDateCreated() + ";path="+image.getPath());
 		}
 	}
 

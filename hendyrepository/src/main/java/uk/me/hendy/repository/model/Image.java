@@ -1,13 +1,12 @@
-package uk.me.hendy.repository.hendycam.model;
+package uk.me.hendy.repository.model;
 
 import java.util.Date;
 
-import uk.me.hendy.repository.model.Image;
-
-public class HendyCamImage extends Image{
+public class Image {
 	
-	/*private Date dateCreated;
+	private Date dateCreated;
 	private String name;
+	private String path;
 	public Date getDateCreated() {
 		return dateCreated;
 	}
@@ -19,6 +18,11 @@ public class HendyCamImage extends Image{
 	}
 	public void setName(String name) {
 		this.name = name;
-	}*/
-
+	}
+	public String getPath() {
+		return path;
+	}
+	public void setPath(String path) {
+		this.path = path;
+	}
 }
