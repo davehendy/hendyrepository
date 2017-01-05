@@ -47,7 +47,7 @@ public class RepositoryApplicationHibernateMySql implements
 		logger.debug("updateMenu("+menu+")");
 		menuDao.update(menu);
 	}
-	@Transactional(propagation=Propagation.REQUIRED,readOnly=true)
+	
 	public List<HendyCamImage> getHendyCamImages() {
 		logger.debug("getHendyCamImages()");
 		return hendyCamDao.getAll();

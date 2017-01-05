@@ -1,7 +1,7 @@
 INSERT INTO menu
 (name,description)
 VALUES
-('hendyweb','Hendy website man menu');
+('hendyweb','Hendy website main menu');
 
 INSERT INTO menu_item
 (menu_name,menu_seq,name,link_url)
